@@ -1,13 +1,5 @@
 #pragma once
 
-//------------------------------------------------------------------------------
-/**
-    @file core/config.h
-    
-	Main configure file for types and OS-specific stuff.
-	
-	(C) 2015-2022 See the LICENSE file.
-*/
 #ifdef __WIN32__
 #include "win32/pch.h"
 #include <xmmintrin.h>
@@ -17,13 +9,6 @@
 #include <stdint.h>
 #include <atomic>
 #include <assert.h>
-#include <vec3.hpp> // glm::vec3
-#include <vec4.hpp> // glm::vec4
-#include <mat4x4.hpp> // glm::mat4
-#include "gtc/matrix_transform.hpp" // glm::translate, glm::rotate, glm::scale, glm::perspective
-#include "gtx/transform.hpp"
-#include "gtc/quaternion.hpp"
-#include "core/debug.h"
 
 typedef size_t index_t;
 typedef unsigned int uint;
