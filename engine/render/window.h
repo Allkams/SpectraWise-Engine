@@ -18,9 +18,11 @@ namespace DISPLAY
 
 		void Update();
 
+		bool ProcessInput(int32 key);
+
 	private:
-		int width;
-		int height;
+		int32 width;
+		int32 height;
 		GLFWwindow* window;
 	};
 }

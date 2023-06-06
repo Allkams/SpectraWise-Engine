@@ -1,18 +1,22 @@
 #include "config.h"
 #include <iostream>
-#include "render/window.h"
+#include "gameApp.h"
+
+/*
+* TODO:
+*	- Make Triangle
+*/
 
 int main()
 {
+	Game::TestApp testApp;
 
-
-	std::cout << "Hello OpenGL!" << std::endl;
-
-	DISPLAY::Window* window = new DISPLAY::Window;
-	/*if (window->Open())
+	if (testApp.Open())
 	{
-		printf("Window up and running!");
-	}*/
+		testApp.Run();
+	}
+
+	testApp.Close();
 
 	return 0;
 }
