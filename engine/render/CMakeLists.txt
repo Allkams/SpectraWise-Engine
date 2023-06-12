@@ -1,6 +1,10 @@
 SET(files_render
 	window.cc
 	window.h
+	RenderBasic.cc
+	RenderBasic.h
+	shader.cc
+	shader.h
     )
 SOURCE_GROUP("render" FILES ${files_render})
 	

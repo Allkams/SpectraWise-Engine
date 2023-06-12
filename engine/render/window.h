@@ -4,6 +4,15 @@
 #include "GLFW/glfw3.h"
 #include <iostream>
 
+/*
+* TODOS:
+*	- Add SetSize
+*	- Add GetSize
+*	- Add a Title variable
+*	- Add Setter and Getter for title.
+*	- More inputs.
+*/
+
 namespace DISPLAY
 {
 	class Window

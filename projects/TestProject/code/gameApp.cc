@@ -3,6 +3,7 @@
 
 namespace Game
 {
+
 	TestApp::TestApp()
 	{
 		//Empty
@@ -15,10 +16,13 @@ namespace Game
 
 	bool TestApp::Open()
 	{
+
 		this->window = new DISPLAY::Window;
 		if (window->Open())
 		{
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+
+
 
 			return true;
 		}
@@ -39,7 +43,7 @@ namespace Game
 			if (this->window->ProcessInput(GLFW_KEY_ESCAPE))
 			{
 				this->window->Close();
-				return false;
+				break;
 			}
 
 			this->window->Update();
