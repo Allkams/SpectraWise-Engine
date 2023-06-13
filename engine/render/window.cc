@@ -4,7 +4,7 @@
 
 namespace DISPLAY
 {
-	Window::Window() : window(nullptr), width(640), height(360)
+	Window::Window() : window(nullptr), width(800), height(600)
 	{
 		glfwInit();
 	}

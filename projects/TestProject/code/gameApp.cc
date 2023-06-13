@@ -73,9 +73,9 @@ namespace Game
 		Render::Triangle triangle;
 
 		std::vector<float> tri = {
-			-0.5f, -0.5, 0.0f,
-			0.5f,-0.5f,0.0f,
-			0.0f,0.5f,0.0f
+			-0.5f, -0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			0.0f, 0.5f, 0.0f
 		};
 
 		triangle.MakeTriangle(tri);
