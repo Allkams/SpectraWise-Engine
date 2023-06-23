@@ -49,5 +49,5 @@ Maybe add
 ### CMake
 [CMAKE Tutorials](https://cmake.org/cmake/help/latest/guide/tutorial/index.html)
 
-## OpenGL
+### OpenGL
 [LearnOpenGL](https://learnopengl.com/)
