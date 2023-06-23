@@ -1,5 +1,5 @@
 # SpectraWise-Engine
-A Rendering engine made with C++20, OpenGL and managed with CMake. This engine is developed as a Youtube series where the focus is to learn about the details in rendering techniques. So please, follow along and see the progress that will be made!
+This rendering engine is created using C++20, OpenGL, and managed with CMake. It is being developed as a YouTube series focused on learning the intricacies of rendering techniques. I invite you to follow along and witness the progress that will be achieved!
 
 ## Table of Content
 - [Requirements](#table-of-content)
@@ -21,11 +21,10 @@ A Rendering engine made with C++20, OpenGL and managed with CMake. This engine i
 If you want to use this engine to build a game or just play around, your free to do!
 
 ### Instructions
-To make a game or a rendering project you need to add your code in a folder inside of the [projects](/projects) root folder. This must include its own CMakeList.txt which generates the project and solution.
-Run the CMake from the root and then open the solution in your target folder.
+To make a game or a rendering project you need to add your code in a folder inside of [projects](/projects). This new folder must include its own CMakeList.txt file, which will generate the project and solution. Execute CMake from the root directory, and subsequently open the solution in your intended destination folder.
 
 ## Bug Reporting
-If you encounter a bug inside the engine, please make a Issue about it!
+Should you encounter any bugs within the engine, please create an issue to report it!
 
 ### Known Issues
  - [] None
