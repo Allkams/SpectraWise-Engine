@@ -2,22 +2,9 @@
 #include "gameApp.h"
 #include "vector"
 #include "render/RenderBasic.h"
+#include "render/shader.h"
 namespace Game
 {
-
-	const char* VSProgram = "#version 330 core\n"
-		"layout (location = 0) in vec3 aPos;\n"
-		"void main()\n"
-		"{\n"
-		"	gl_Position = vec4(aPos, 1.0f);\n"
-		"}\0";
-
-	const char* FSProgram = "#version 330 core\n"
-		"out vec4 FragColor;\n"
-		"void main()\n"
-		"{\n"
-		"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-		"}\0";
 
 	TestApp::TestApp()
 	{
@@ -49,26 +36,9 @@ namespace Game
 	{
 		//PreWork
 
-		unsigned int VShader;
-		VShader = glCreateShader(GL_VERTEX_SHADER);
+		Shader shader = Shader("./shaders/VertexShader.vs", "./shaders/FragementShader.fs");
 
-		glShaderSource(VShader, 1, &VSProgram, NULL);
-		glCompileShader(VShader);
-
-		unsigned int FShader;
-		FShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-		glShaderSource(FShader, 1, &FSProgram, NULL);
-		glCompileShader(FShader);
-
-		unsigned int ShdProgram;
-		ShdProgram = glCreateProgram();
-
-		glAttachShader(ShdProgram, VShader);
-		glAttachShader(ShdProgram, FShader);
-		glLinkProgram(ShdProgram);
-
-		glUseProgram(ShdProgram);
+		shader.Enable();
 
 		Render::Triangle triangle;
 
@@ -96,9 +66,6 @@ namespace Game
 
 			this->window->Update();
 		}
-
-		glDeleteShader(VShader);
-		glDeleteShader(FShader);
 
 		return true;
 	}

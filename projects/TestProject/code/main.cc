@@ -5,10 +5,9 @@
 
 /*
 * TODO Today:
-*	- Make Triangle
+*	- Make a ShaderLoader.
 * 
 * Future TODO:
-*	- Make a ShaderLoader.
 *	- Make a Square and then a Cube.
 *	- Make a Sphere
 *	- Create an OBJ Loader
