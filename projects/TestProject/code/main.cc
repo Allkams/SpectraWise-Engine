@@ -15,7 +15,6 @@
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 #include "config.h"
 
 #include <iostream>
@@ -23,7 +22,7 @@
 
 /*
 * TODO Today:
-*	- Make a ShaderLoader.
+*	- Make a Square and then a Cube.
 * 
 * Future TODO:
 *	- Make a Square and then a Cube.

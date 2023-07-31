@@ -1,6 +1,5 @@
 #pragma once
-
-// 
+ 
 // Copyright 2023 Alexander Marklund (Allkams02@gmail.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this softwareand associated
@@ -17,18 +16,62 @@
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#include "GL/glew.h"
 #include <vector>
+#include "GL/glew.h"
+#include "glm.hpp"
+
+//TODO: Change Triangle to a "Mesh" class.
+//TODO: Add functions for Triangle, Cube, and Spheres. With posibilities for debug rendering.
 
 namespace Render
 {
-	/*struct Vertices
+	// Vertices are data points in 3D space representing the corners or endpoints of geometric shapes processed by the GPU in OpenGL.
+	struct Vertice
 	{
-		Vec3 Pos
-		Vec4 Color
-		...
-	};*/
+		glm::vec3 position;
+		glm::vec4 color;
+		glm::vec2 texCoord;
+	};
 
+	// PrimitiveType represents the type of primitive (points, lines, or triangles) used in the OpenGL rendering process.
+	enum class PrimitiveTypes
+	{
+		Points,
+		Lines,
+		Triangles
+	};
+
+	// Primitives are basic geometric shapes formed by connecting vertices, which are then rendered and processed by the GPU in OpenGL.
+	struct Primitive
+	{
+		GLuint startIndex;
+		GLuint numVertices;
+	};
+
+	//IMPLEMENT THIS:
+	class Mesh
+	{
+	public:
+		std::vector<Primitive> primitives;
+
+
+		Mesh(std::vector<Vertice> Vertices, std::vector<GLuint> indices, std::vector<Primitive> primitives);
+
+		void render(GLuint primitiveIndex);
+
+		GLuint getPrimitiveSize();
+
+		void clearDrawBuffers();
+		void bindVAO();
+		void unBindVAO();
+
+	private:
+		GLuint VAO, VBO, EBO;
+
+		void processMesh(std::vector<Vertice> Vertices, std::vector<GLuint> indices);
+	};
+
+	//REPLACE THIS WITH MESH AND CREATE THIS AS A FUNCTION INSTEAD RETURNING A MESH
 	class Triangle
 	{
 	public:
