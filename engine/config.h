@@ -9,12 +9,6 @@
 #include <stdint.h>
 #include <atomic>
 #include <assert.h>
-#include <vec3.hpp> // glm::vec3
-#include <vec4.hpp> // glm::vec4
-#include <mat4x4.hpp> // glm::mat4
-#include "gtc/matrix_transform.hpp" // glm::translate, glm::rotate, glm::scale, glm::perspective
-#include "gtx/transform.hpp"
-#include "gtc/quaternion.hpp"
 
 typedef size_t index_t;
 typedef unsigned int uint;
@@ -30,7 +24,6 @@ typedef uint8_t		uint8;
 typedef int8_t		int8;
 typedef uint8_t		uchar;
 
-// eh, windows already defines byte, so don't redefine byte if we are running windows
 #ifndef __WIN32__
 typedef uint8_t      byte;
 #endif
