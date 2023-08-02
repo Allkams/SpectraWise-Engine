@@ -54,14 +54,11 @@ namespace Render
 	public:
 		std::vector<Primitive> primitives;
 
-
 		Mesh(std::vector<Vertice> Vertices, std::vector<GLuint> indices, std::vector<Primitive> primitives);
 
-		void render(GLuint primitiveIndex);
+		void renderMesh(GLuint primitiveIndex);
 
-		GLuint getPrimitiveSize();
-
-		void clearDrawBuffers();
+		void clearBuffers();
 		void bindVAO();
 		void unBindVAO();
 
@@ -70,6 +67,12 @@ namespace Render
 
 		void processMesh(std::vector<Vertice> Vertices, std::vector<GLuint> indices);
 	};
+
+	Mesh CreateTriangle(float32 width, float32 height);
+	Mesh CreatePlane();
+	Mesh CreateCube();
+	Mesh CreateSphere();
+	Mesh CreateCylinder();
 
 	//REPLACE THIS WITH MESH AND CREATE THIS AS A FUNCTION INSTEAD RETURNING A MESH
 	class Triangle

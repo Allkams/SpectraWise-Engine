@@ -59,15 +59,7 @@ namespace Game
 
 		shader.Enable();
 
-		Render::Triangle triangle;
-
-		std::vector<float> tri = {
-			-0.5f, -0.5f, 0.0f,
-			0.5f, -0.5f, 0.0f,
-			0.0f, 0.5f, 0.0f
-		};
-
-		triangle.MakeTriangle(tri);
+		Render::Mesh triangle = Render::CreateTriangle(1.0f, 1.0f);
 
 		while (this->window->IsOpen())
 		{
@@ -81,7 +73,9 @@ namespace Game
 				break;
 			}
 
-			triangle.DrawTriangle();
+			triangle.bindVAO();
+			triangle.renderMesh(0);
+			triangle.unBindVAO();
 
 			this->window->Update();
 		}
