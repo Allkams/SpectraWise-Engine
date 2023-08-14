@@ -5,6 +5,8 @@ SET(files_render
 	RenderBasic.h
 	shader.cc
 	shader.h
+	camera.cc
+	camera.h
     )
 SOURCE_GROUP("render" FILES ${files_render})
 	

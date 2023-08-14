@@ -1,4 +1,5 @@
-// 
+#pragma once
+
 // Copyright 2023 Alexander Marklund (Allkams02@gmail.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this softwareand associated
@@ -13,34 +14,46 @@
 // IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN 
 // AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 // THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
-
-#include "config.h"
 
 #include <iostream>
-#include "gameApp.h"
+#include <GL/glew.h>
+#include <glm.hpp>
 
-/*
-* TODO Today:
-*	- Make a Square and then a Cube.
-* 
-* Future TODO:
-*	- Add a Texture loader
-*	- Make a Sphere
-*	- Create an OBJ Loader
-*	- Create an GLTF Loader
-*/
-
-int main()
+namespace RenderUtils
 {
-	Game::TestApp testApp;
-
-	if (testApp.Open())
+	enum CameraMovement
 	{
-		testApp.Run();
-	}
+		FORWARD,
+		BACKWARD,
+		LEFT,
+		RIGHT
+	};
 
-	testApp.Close();
+	class Camera
+	{
+	public:
+		glm::vec3 Position;
+		glm::vec3 Front;
+		glm::vec3 Up;
+		glm::vec3 Right;
+		glm::vec3 WorldUp;
 
-	return 0;
+		float Yaw;
+		float Pitch;
+
+		float MovementSpeed;
+		float MouseSensitivity;
+		float FOV;
+
+		Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = -90.0f, float pitch = 0.0f);
+		Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
+
+		glm::mat4 GetViewMatrix();
+
+		void Move(CameraMovement direction, float deltaTime);
+		void Look(float xOffset, float yOffset, GLboolean constrainPitch = true);
+		void Zoom(float yOffset);
+	private:
+		void updateCamera();
+	};
 }

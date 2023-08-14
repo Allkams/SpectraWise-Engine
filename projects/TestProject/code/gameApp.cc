@@ -20,6 +20,7 @@
 #include "vector"
 #include "render/RenderBasic.h"
 #include "render/shader.h"
+#include "render/camera.h"
 
 
 namespace Game
@@ -54,18 +55,25 @@ namespace Game
 	bool TestApp::Run()
 	{
 		//PreWork
+		//RenderUtils::Camera Cam; //Not fully implemented yet!
 
 		Shader shader = Shader("./shaders/VertexShader.vs", "./shaders/FragementShader.fs");
 
 		shader.Enable();
 
 		Render::Mesh triangle = Render::CreateTriangle(1.0f, 1.0f);
+		Render::Mesh Cube = Render::CreateCube(1.0f, 1.0f, 1.0f);
 
 		while (this->window->IsOpen())
 		{
 
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			glEnable(GL_DEPTH_TEST);
+
+			// Accept fragment if it closer to the camera than the former one
+			glDepthFunc(GL_LESS);
+
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			if (this->window->ProcessInput(GLFW_KEY_ESCAPE))
 			{
@@ -73,9 +81,9 @@ namespace Game
 				break;
 			}
 
-			triangle.bindVAO();
-			triangle.renderMesh(0);
-			triangle.unBindVAO();
+			Cube.bindVAO();
+			Cube.renderMesh(0);
+			Cube.unBindVAO();
 
 			this->window->Update();
 		}

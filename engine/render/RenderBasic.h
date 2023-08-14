@@ -20,7 +20,6 @@
 #include "GL/glew.h"
 #include "glm.hpp"
 
-//TODO: Change Triangle to a "Mesh" class.
 //TODO: Add functions for Triangle, Cube, and Spheres. With posibilities for debug rendering.
 
 namespace Render
@@ -28,9 +27,16 @@ namespace Render
 	// Vertices are data points in 3D space representing the corners or endpoints of geometric shapes processed by the GPU in OpenGL.
 	struct Vertice
 	{
-		glm::vec3 position;
-		glm::vec4 color;
-		glm::vec2 texCoord;
+		glm::vec3 Position;
+		glm::vec4 Color;
+		glm::vec2 TexCoord;
+
+		Vertice(glm::vec3 pos, glm::vec4 color, glm::vec2 texCoord)
+		{
+			Position = pos;
+			Color = color;
+			TexCoord = texCoord;
+		}
 	};
 
 	// PrimitiveType represents the type of primitive (points, lines, or triangles) used in the OpenGL rendering process.
@@ -48,7 +54,6 @@ namespace Render
 		GLuint numVertices;
 	};
 
-	//IMPLEMENT THIS:
 	class Mesh
 	{
 	public:
@@ -70,24 +75,7 @@ namespace Render
 
 	Mesh CreateTriangle(float32 width, float32 height);
 	Mesh CreatePlane();
-	Mesh CreateCube();
+	Mesh CreateCube(float32 width, float32 height, float32 depth);
 	Mesh CreateSphere();
 	Mesh CreateCylinder();
-
-	//REPLACE THIS WITH MESH AND CREATE THIS AS A FUNCTION INSTEAD RETURNING A MESH
-	class Triangle
-	{
-	public:
-		Triangle();
-		~Triangle();
-
-		void MakeTriangle(std::vector<float> vertices);
-
-		void DrawTriangle();
-
-	private:
-		GLuint VBO;
-		GLuint EBO;
-		GLuint VAO;
-	};
 }
