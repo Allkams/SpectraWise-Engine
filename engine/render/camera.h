@@ -33,10 +33,11 @@ namespace RenderUtils
 	{
 	public:
 		glm::vec3 Position;
-		glm::vec3 Front;
-		glm::vec3 Up;
-		glm::vec3 Right;
-		glm::vec3 WorldUp;
+		glm::vec3 ForwardVector;
+		glm::vec3 UpVector;
+		glm::vec3 RightVector;
+		glm::vec3 WorldUpVector;
+		glm::vec3 Target;
 
 		float Yaw;
 		float Pitch;
@@ -49,6 +50,7 @@ namespace RenderUtils
 		Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
 
 		glm::mat4 GetViewMatrix();
+		glm::mat4 GetPerspective(float width, float height, float near, float far);
 
 		void Move(CameraMovement direction, float deltaTime);
 		void Look(float xOffset, float yOffset, GLboolean constrainPitch = true);

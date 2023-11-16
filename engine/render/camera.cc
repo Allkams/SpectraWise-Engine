@@ -19,40 +19,49 @@
 
 namespace RenderUtils
 {
-	Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(2.5f), MouseSensitivity(0.1f), FOV(45.0f)
+	Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch) : ForwardVector(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(2.5f), MouseSensitivity(0.1f), FOV(45.0f)
 	{
 		Position = position;
-		WorldUp = up;
+		WorldUpVector = up;
 		Yaw = yaw;
 		Pitch = pitch;
+		Target = glm::vec3();
 		updateCamera();
 	}
 
-	Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(2.5f), MouseSensitivity(0.1f), FOV(45.0f)
+	Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : ForwardVector(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(2.5f), MouseSensitivity(0.1f), FOV(45.0f)
 	{
 		Position = glm::vec3(posX, posY, posZ);
-		WorldUp = glm::vec3(upX, upY, upZ);
+		WorldUpVector = glm::vec3(upX, upY, upZ);
 		Yaw = yaw;
 		Pitch = pitch;
+		Target = glm::vec3();
 		updateCamera();
 	}
 
 	glm::mat4 Camera::GetViewMatrix()
 	{
-		return glm::lookAt(Position, Position + Front, Up);
+		return glm::lookAt(Position, Target, UpVector);
+	}
+
+	glm::mat4 Camera::GetPerspective(float width, float height, float near, float far)
+	{
+		return glm::perspective(FOV, width/ height, near, far);
 	}
 
 	void Camera::Move(CameraMovement direction, float deltaTime)
 	{
 		float velocity = MovementSpeed * deltaTime;
 		if (direction == FORWARD)
-			Position += Front * velocity;
+			Position += ForwardVector * velocity;
 		if (direction == BACKWARD)
-			Position -= Front * velocity;
+			Position -= ForwardVector * velocity;
 		if (direction == LEFT)
-			Position -= Right * velocity;
+			Position -= RightVector * velocity;
 		if (direction == RIGHT)
-			Position += Right * velocity;
+			Position += RightVector * velocity;
+
+		updateCamera();
 	}
 
 	void Camera::Look(float xoffset, float yoffset, GLboolean constrainPitch)
@@ -85,14 +94,14 @@ namespace RenderUtils
 
 	void Camera::updateCamera()
 	{
-		// calculate the new Front vector
-		glm::vec3 front;
-		front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		front.y = sin(glm::radians(Pitch));
-		front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		Front = glm::normalize(front);
+		// calculate the new forward vector
+		glm::vec3 forwardVec = glm::vec3();
+		forwardVec.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+		forwardVec.y = sin(glm::radians(Pitch));
+		forwardVec.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+		ForwardVector = glm::normalize(forwardVec);
 		// also re-calculate the Right and Up vector
-		Right = glm::normalize(glm::cross(Front, WorldUp));
-		Up = glm::normalize(glm::cross(Right, Front));
+		RightVector = glm::normalize(glm::cross(ForwardVector, WorldUpVector));
+		UpVector = glm::normalize(glm::cross(RightVector, ForwardVector));
 	}
 }
