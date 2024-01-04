@@ -17,7 +17,8 @@
 
 #include "config.h"
 #include "gameApp.h"
-#include "vector"
+#include <vector>
+#include <chrono>
 #include "render/RenderBasic.h"
 #include "render/shader.h"
 #include "render/camera.h"
@@ -55,15 +56,16 @@ namespace Game
 	bool TestApp::Run()
 	{
 		//PreWork
-		RenderUtils::Camera Cam; //Not fully implemented yet!
+		RenderUtils::Camera Cam(glm::vec3(0)); //Not fully implemented yet!
 
 		Shader shader = Shader("./shaders/VertexShader.vs", "./shaders/FragementShader.fs");
 
 		shader.Enable();
 
-		glm::mat4 perspect = Cam.GetPerspective(800, 600, 0.0f, 1000.0f);
+		glm::mat4 perspect = Cam.GetPerspective(800, 600, 0.1f, 1000.0f);
 
 		glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::translate(glm::vec3(0.0f, 0.0f, -3.0f));
 
 		glm::mat4 view = perspect * Cam.GetViewMatrix() * trans;
 
@@ -72,13 +74,14 @@ namespace Game
 		Render::Mesh triangle = Render::CreateTriangle(1.0f, 1.0f);
 		Render::Mesh Cube = Render::CreateCube(1.0f, 1.0f, 1.0f);
 
-		//Cam.FOV = 120.0f;
+		glEnable(GL_DEPTH_TEST);
 
+		//Cam.FOV = 120.0f;
+		float dt = 0.016667f;
 		while (this->window->IsOpen())
 		{
-
+			auto timeStart = std::chrono::steady_clock::now();
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			glEnable(GL_DEPTH_TEST);
 
 			// Accept fragment if it closer to the camera than the former one
 			glDepthFunc(GL_LESS);
@@ -98,30 +101,30 @@ namespace Game
 
 			if (this->window->ProcessInput(GLFW_KEY_W))
 			{
-				Cam.Move(RenderUtils::FORWARD, 0.016667f);
-				view = perspect * Cam.GetViewMatrix() * trans;
+				Cam.Move(RenderUtils::FORWARD, dt);
 			}
-			else if (this->window->ProcessInput(GLFW_KEY_S))
+			if (this->window->ProcessInput(GLFW_KEY_S))
 			{
-				Cam.Move(RenderUtils::BACKWARD, 0.016667f);
-				view = perspect * Cam.GetViewMatrix() * trans;
+				Cam.Move(RenderUtils::BACKWARD, dt);
 			}
-			else if (this->window->ProcessInput(GLFW_KEY_A))
+			if (this->window->ProcessInput(GLFW_KEY_A))
 			{
-				Cam.Move(RenderUtils::LEFT, 0.016667f);
-				view = perspect * Cam.GetViewMatrix() * trans;
+				Cam.Move(RenderUtils::LEFT, dt);
 			}
-			else if (this->window->ProcessInput(GLFW_KEY_D))
+			if (this->window->ProcessInput(GLFW_KEY_D))
 			{
-				Cam.Move(RenderUtils::RIGHT, 0.016667f);
-				view = perspect * Cam.GetViewMatrix() * trans;
+				Cam.Move(RenderUtils::RIGHT, dt);
 			}
+			view = perspect * Cam.GetViewMatrix() * trans;
 
+			shader.setMat4("transform", view);
 			Cube.bindVAO();
 			Cube.renderMesh(0);
 			Cube.unBindVAO();
-
 			this->window->Update();
+
+			auto timeEnd = std::chrono::steady_clock::now();
+			dt = std::chrono::duration<double>(timeEnd - timeStart).count();
 		}
 
 		return true;

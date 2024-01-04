@@ -132,28 +132,28 @@ namespace Render
 		Vertice Point8 = Vertice(glm::vec3(widthPos, -heightPos, depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
 
 		//Face three
-		Vertice Point9 = Vertice(glm::vec3(-widthPos, -heightPos, -depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point9 = Vertice(glm::vec3(-widthPos, -heightPos, -depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f));
 		Vertice Point10 = Vertice(glm::vec3(-widthPos, heightPos, -depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f));
-		Vertice Point11 = Vertice(glm::vec3(widthPos, heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
-		Vertice Point12 = Vertice(glm::vec3(widthPos, -heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
+		Vertice Point11 = Vertice(glm::vec3(widthPos, heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point12 = Vertice(glm::vec3(widthPos, -heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f));
 
 		//Face four
-		Vertice Point13 = Vertice(glm::vec3(-widthPos, -heightPos, depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point13 = Vertice(glm::vec3(-widthPos, -heightPos, depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f));
 		Vertice Point14 = Vertice(glm::vec3(-widthPos, heightPos, depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f));
-		Vertice Point15 = Vertice(glm::vec3(-widthPos, heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
-		Vertice Point16 = Vertice(glm::vec3(-widthPos, -heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
+		Vertice Point15 = Vertice(glm::vec3(-widthPos, heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point16 = Vertice(glm::vec3(-widthPos, -heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f));
 
 		//Face top
-		Vertice Point17 = Vertice(glm::vec3(widthPos, heightPos, depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point17 = Vertice(glm::vec3(widthPos, heightPos, depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f));
 		Vertice Point18 = Vertice(glm::vec3(widthPos, heightPos, -depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f));
-		Vertice Point19 = Vertice(glm::vec3(-widthPos, heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
-		Vertice Point20 = Vertice(glm::vec3(-widthPos, heightPos, depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
+		Vertice Point19 = Vertice(glm::vec3(-widthPos, heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point20 = Vertice(glm::vec3(-widthPos, heightPos, depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f));
 
 		//Face bottom
-		Vertice Point21 = Vertice(glm::vec3(widthPos, -heightPos, depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point21 = Vertice(glm::vec3(widthPos, -heightPos, depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f));
 		Vertice Point22 = Vertice(glm::vec3(widthPos, -heightPos, -depthPos), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f));
-		Vertice Point23 = Vertice(glm::vec3(-widthPos, -heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
-		Vertice Point24 = Vertice(glm::vec3(-widthPos, -heightPos, depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
+		Vertice Point23 = Vertice(glm::vec3(-widthPos, -heightPos, -depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point24 = Vertice(glm::vec3(-widthPos, -heightPos, depthPos), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f));
 
 		Primitive Cube;
 		Cube.startIndex = 0;

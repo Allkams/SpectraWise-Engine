@@ -25,7 +25,7 @@ namespace RenderUtils
 		WorldUpVector = up;
 		Yaw = yaw;
 		Pitch = pitch;
-		Target = glm::vec3();
+		Target = ForwardVector * 2.0f;
 		updateCamera();
 	}
 
@@ -35,18 +35,18 @@ namespace RenderUtils
 		WorldUpVector = glm::vec3(upX, upY, upZ);
 		Yaw = yaw;
 		Pitch = pitch;
-		Target = glm::vec3();
+		Target = ForwardVector * 2.0f;
 		updateCamera();
 	}
 
 	glm::mat4 Camera::GetViewMatrix()
 	{
-		return glm::lookAt(Position, Target, UpVector);
+		return glm::lookAt(Position, Position + ForwardVector, UpVector);
 	}
 
 	glm::mat4 Camera::GetPerspective(float width, float height, float near, float far)
 	{
-		return glm::perspective(FOV, width/ height, near, far);
+		return glm::perspective(FOV, width / height, near, far);
 	}
 
 	void Camera::Move(CameraMovement direction, float deltaTime)
@@ -95,8 +95,8 @@ namespace RenderUtils
 	void Camera::updateCamera()
 	{
 		// calculate the new forward vector
-		glm::vec3 forwardVec = glm::vec3();
-		forwardVec.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+		glm::vec3 forwardVec = glm::vec3(0);
+		forwardVec.x = cos(glm::radians(Yaw)) * sin(glm::radians(Pitch));
 		forwardVec.y = sin(glm::radians(Pitch));
 		forwardVec.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
 		ForwardVector = glm::normalize(forwardVec);
