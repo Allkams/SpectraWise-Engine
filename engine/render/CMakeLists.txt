@@ -7,6 +7,8 @@ SET(files_render
 	shader.h
 	camera.cc
 	camera.h
+	computeshader.cc
+	computeshader.h
     )
 SOURCE_GROUP("render" FILES ${files_render})
 	
