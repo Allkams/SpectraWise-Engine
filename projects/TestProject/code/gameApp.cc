@@ -57,20 +57,25 @@ namespace Game
 	bool TestApp::Run()
 	{
 		//PreWork
-		RenderUtils::Camera Cam(glm::vec3(0)); //Not fully implemented yet!
+		int32 w;
+		int32 h;
+		window->GetSize(w, h);
+		RenderUtils::Camera Cam(glm::vec3(0));
 
 		Shader shader = Shader("./shaders/VertexShader.vs", "./shaders/FragementShader.fs");
 
 		shader.Enable();
 
 		InputSystem::Keyboard* kbd = InputSystem::GetDefaultKeyboard();
+		InputSystem::Mouse* mouse = InputSystem::GetDefaultMouse();
 
-		glm::mat4 perspect = Cam.GetPerspective(800, 600, 0.1f, 1000.0f);
+		Cam.setProjection(w, h, 0.01f, 1000.0f);
+		Cam.setViewMatrix();
 
 		glm::mat4 trans = glm::mat4(1.0f);
 		trans = glm::translate(glm::vec3(0.0f, 0.0f, -3.0f));
 
-		glm::mat4 view = perspect * Cam.GetViewMatrix() * trans;
+		glm::mat4 view = Cam.GetProjection() * Cam.GetViewMatrix() * trans;
 
 		shader.setMat4("transform", view);
 
@@ -80,6 +85,12 @@ namespace Game
 		glEnable(GL_DEPTH_TEST);
 
 		//Cam.FOV = 120.0f;
+
+		Cam.Position = { 0, 0, 10 };
+		Cam.Target = { 0,0,0 };
+		Cam.setViewMatrix(true);
+		Cam.shouldTarget = false;
+		Cam.setViewProjection();
 		float dt = 0.016667f;
 		while (this->window->IsOpen())
 		{
@@ -118,7 +129,13 @@ namespace Game
 			{
 				Cam.Move(RenderUtils::RIGHT, dt);
 			}
-			view = perspect * Cam.GetViewMatrix() * trans;
+
+			if (kbd->held[InputSystem::Key::Code::LeftControl])
+			{
+				Cam.Look(mouse->delta.x, -mouse->delta.y);
+			}
+			Cam.setViewMatrix(false);
+			view = Cam.GetProjection() * Cam.GetViewMatrix() * trans;
 
 			shader.setMat4("transform", view);
 			Cube.bindVAO();
