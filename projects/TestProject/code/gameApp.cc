@@ -22,6 +22,7 @@
 #include "render/RenderBasic.h"
 #include "render/shader.h"
 #include "render/camera.h"
+#include "render/input/inputManager.h"
 
 
 namespace Game
@@ -62,6 +63,8 @@ namespace Game
 
 		shader.Enable();
 
+		InputSystem::Keyboard* kbd = InputSystem::GetDefaultKeyboard();
+
 		glm::mat4 perspect = Cam.GetPerspective(800, 600, 0.1f, 1000.0f);
 
 		glm::mat4 trans = glm::mat4(1.0f);
@@ -88,30 +91,30 @@ namespace Game
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			if (this->window->ProcessInput(GLFW_KEY_F1))
+			if (kbd->held[InputSystem::Key::Code::F1])
 			{
 				shader.ReloadShader();
 			}
 
-			if (this->window->ProcessInput(GLFW_KEY_ESCAPE))
+			if (kbd->held[InputSystem::Key::Code::Escape])
 			{
 				this->window->Close();
 				break;
 			}
 
-			if (this->window->ProcessInput(GLFW_KEY_W))
+			if (kbd->held[InputSystem::Key::Code::W])
 			{
 				Cam.Move(RenderUtils::FORWARD, dt);
 			}
-			if (this->window->ProcessInput(GLFW_KEY_S))
+			if (kbd->held[InputSystem::Key::Code::S])
 			{
 				Cam.Move(RenderUtils::BACKWARD, dt);
 			}
-			if (this->window->ProcessInput(GLFW_KEY_A))
+			if (kbd->held[InputSystem::Key::Code::A])
 			{
 				Cam.Move(RenderUtils::LEFT, dt);
 			}
-			if (this->window->ProcessInput(GLFW_KEY_D))
+			if (kbd->held[InputSystem::Key::Code::D])
 			{
 				Cam.Move(RenderUtils::RIGHT, dt);
 			}
@@ -122,6 +125,7 @@ namespace Game
 			Cube.renderMesh(0);
 			Cube.unBindVAO();
 			this->window->Update();
+			this->window->SwapBuffers();
 
 			auto timeEnd = std::chrono::steady_clock::now();
 			dt = std::chrono::duration<double>(timeEnd - timeStart).count();
