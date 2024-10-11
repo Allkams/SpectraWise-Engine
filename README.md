@@ -1,31 +1,35 @@
 # SpectraWise-Engine
 Welcome to the **Spectrawise Rendering Engine**! This project began in mid-2023 with the aim of exploring OpenGL and Game Engine Architecture. Since then, it has been an exciting learning journey, and the engine is steadily progressing towards that goal.  
-Finishing my studies this summer (2024) as a Bachelor's degree in Computer Science, specializing in Game Programming. As a personal hobby project, the engine's development will continue periodically, with the primary focus now being to make it as stable and useful as possible.  
+Finishing my studies this summer (2024) with a Bachelor's degree in Computer Science, specializing in Game Programming, the primary focus has now shifted to make it as stable and useful as possible. As a personal hobby project, the engine's development will continue periodically.  
 Feel free to follow along or contribute to this journey!
 
 ## Table of Content
 - [Requirements](#table-of-content)
+- [Current State](#current-state-of-the-engine)
 - [Personal Usage Info](#personal-usage-info)
-    - [Instructions](#instructions)
+    - [License](#license)
+    - [Getting Started](#getting-started)
 - [Bug Reporting](#bug-reporting)
     - [Known Issues](#known-issues)
 - [Examples](#examples)
 - [External Librarys](#external-librarys)
 - [External Help](#external-librarys)
     - [CMAKE](#cmake)
-    - [OpenGL](#opengl) 
+    - [OpenGL](#opengl)
+- [Changelog](#changelog)
 
 ## Requirements
 - Cmake 3.2+
 - Compiler that runs C++20
 
 ## Current state of the engine
-[October 2024]
+[October 2024]  
 The **Spectrawise Rendering Engine** is currently in an unstable state with limited features. While the fundamental components of a rendering engine are in place, it lacks user-friendly tools and interfaces.  
 Over the next few months, the engine will undergo significant changes as I aim to implement key features. The goal is to evolve it into a basic, yet functional, rendering engine.  
 Stay tuned for updates!
 
 ## Personal Usage Info
+### License
 The **Spectrawise Rendering Engine** is released under the [MIT License](LICENSE), which grants you full permission to use, modify, and distribute the software for personal, educational, or commercial purposes. This includes the ability to create games or other interactive applications using the engine.  
   
 By using the engine, you are free to:
@@ -39,7 +43,7 @@ If you decide to release a game or product based on the engine, no attribution i
   
 For more details, please refer to the [MIT License](LICENSE) included with this repository.
 
-### Instructions
+### Getting Started
 To make a game or a rendering project you need to add your code in a folder inside of [projects](/projects). This new folder must include its own CMakeList.txt file, which will generate the project and solution. Execute CMake from the root directory, and subsequently open the solution in your intended destination folder.
 
 ## Bug Reporting
