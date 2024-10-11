@@ -62,23 +62,26 @@ namespace Render
 
 	void Mesh::renderMesh(GLuint primitiveIndex)
 	{
-		if (primitiveIndex <= primitives.size()) {
-
+		if (primitiveIndex <= primitives.size())
+		{
 			//Drawes each primitive
 			glDrawElements(GL_TRIANGLES, 1 + primitives[primitiveIndex].numVertices - primitives[primitiveIndex].startIndex, GL_UNSIGNED_INT, (void*)(primitives[primitiveIndex].startIndex * sizeof(GLint)));
 		}
 	}
 
-	void Mesh::clearBuffers() {
+	void Mesh::clearBuffers()
+	{
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
 	}
 
-	void Mesh::bindVAO() {
+	void Mesh::bindVAO()
+	{
 		glBindVertexArray(VAO);
 	}
 
-	void Mesh::unBindVAO() {
+	void Mesh::unBindVAO()
+	{
 		glBindVertexArray(0);
 	}
 
@@ -108,10 +111,36 @@ namespace Render
 			{
 				Triangle
 			}
-		);
+			);
 	}
-	
-	Mesh CreatePlane(float32 width, float32 height);
+
+	Mesh CreatePlane(float32 width, float32 height)
+	{
+		float32 widthPos = width / 2.0f;
+		float32 heightPos = height / 2.0f;
+
+		Vertice Point1 = Vertice(glm::vec3(widthPos, -heightPos, 0), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
+		Vertice Point2 = Vertice(glm::vec3(widthPos, heightPos, 0), glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f));
+		Vertice Point3 = Vertice(glm::vec3(-widthPos, heightPos, 0), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
+		Vertice Point4 = Vertice(glm::vec3(-widthPos, -heightPos, 0), glm::vec4(0.0f, 1.0f, 1.0f, 1.0f), glm::vec2(0.5f, 1.0f));
+
+		Primitive Plane;
+		Plane.startIndex = 0;
+		Plane.numVertices = 4;
+
+		return Mesh(
+			{
+				Point1, Point2, Point3, Point4
+			},
+			{
+				0,1,3,
+				1,2,3
+			},
+			{
+				Plane
+			}
+			);
+	}
 
 	Mesh CreateCube(float32 width, float32 height, float32 depth)
 	{
