@@ -41,6 +41,7 @@
 ## Future implementations
 - [ ] implement SSAO
 - [ ] Shader debug system
+- [ ] Implement Vulkan rendering system
 
 ## Need to be done updates
 - [ ] Update the mesh so its easier to handle
