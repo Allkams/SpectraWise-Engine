@@ -1,8 +1,10 @@
 SET(files_render_render
 	window.cc
 	window.h
-	RenderBasic.cc
-	RenderBasic.h
+        rendermanager.cc
+	rendermanager.h
+	renderbasic.cc
+	renderbasic.h
 	shader.cc
 	shader.h
 	camera.cc
@@ -12,21 +14,14 @@ SET(files_render_render
     )
 SOURCE_GROUP("render" FILES ${files_render_render})
 
-SET(files_render_input
-	input/gamepad.h
-	input/gamepad.cc
-	input/inputManager.h
-	input/inputManager.cc
-	input/key.h
-	input/key.cc
-	input/keyboard.h
-	input/mouse.h
-	)
-SOURCE_GROUP("input" FILES ${files_render_input})
+SET(files_render_vulkan
+	Vulkan/VulkanRenderer.h
+    )
+SOURCE_GROUP("vulkan" FILES ${files_render_vulkan})
 
-SET(files_render
-	${files_render_render}
-	${files_render_input})
+
+SET(files_render ${files_render_render}
+		 ${files_render_vulkan})
 	
 SET(files_pch ../config.h ../config.cc)
 SOURCE_GROUP("pch" FILES ${files_pch})

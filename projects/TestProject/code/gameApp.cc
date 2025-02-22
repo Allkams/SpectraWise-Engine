@@ -22,7 +22,7 @@
 #include "render/RenderBasic.h"
 #include "render/shader.h"
 #include "render/camera.h"
-#include "render/input/inputManager.h"
+#include "core/input/inputManager.h"
 
 
 namespace Game
@@ -60,14 +60,15 @@ namespace Game
 		int32 w;
 		int32 h;
 		window->GetSize(w, h);
+
+		InputSystem::Keyboard* kbd = InputSystem::GetDefaultKeyboard();
+		InputSystem::Mouse* mouse = InputSystem::GetDefaultMouse();
+
 		RenderUtils::Camera Cam(glm::vec3(0));
 
 		Shader shader = Shader("./shaders/VertexShader.vs", "./shaders/FragementShader.fs");
 
 		shader.Enable();
-
-		InputSystem::Keyboard* kbd = InputSystem::GetDefaultKeyboard();
-		InputSystem::Mouse* mouse = InputSystem::GetDefaultMouse();
 
 		Cam.setProjection(w, h, 0.01f, 1000.0f);
 		Cam.setViewMatrix();
@@ -91,6 +92,7 @@ namespace Game
 		Cam.setViewMatrix(true);
 		Cam.shouldTarget = false;
 		Cam.setViewProjection();
+
 		float dt = 0.016667f;
 		while (this->window->IsOpen())
 		{
@@ -102,17 +104,18 @@ namespace Game
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			if (kbd->held[InputSystem::Key::Code::F1])
-			{
-				shader.ReloadShader();
-			}
-
 			if (kbd->held[InputSystem::Key::Code::Escape])
 			{
 				this->window->Close();
 				break;
 			}
 
+			if (kbd->pressed[InputSystem::Key::Code::F1])
+			{
+				shader.Reload();
+			}
+
+			// Move this into the camera/Entity?
 			if (kbd->held[InputSystem::Key::Code::W])
 			{
 				Cam.Move(RenderUtils::FORWARD, dt);
@@ -138,9 +141,7 @@ namespace Game
 			view = Cam.GetProjection() * Cam.GetViewMatrix() * trans;
 
 			shader.setMat4("transform", view);
-			Cube.bindVAO();
-			Cube.renderMesh(0);
-			Cube.unBindVAO();
+			Cube.render();
 			this->window->Update();
 			this->window->SwapBuffers();
 

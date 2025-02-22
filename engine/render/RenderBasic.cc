@@ -60,13 +60,30 @@ namespace Render
 
 	}
 
-	void Mesh::renderMesh(GLuint primitiveIndex)
+	void Mesh::render()
 	{
-		if (primitiveIndex <= primitives.size())
+		bindVAO();
+		for (GLuint primitiveIndex = 0; primitiveIndex < primitives.size(); primitiveIndex++)
 		{
 			//Drawes each primitive
 			glDrawElements(GL_TRIANGLES, 1 + primitives[primitiveIndex].numVertices - primitives[primitiveIndex].startIndex, GL_UNSIGNED_INT, (void*)(primitives[primitiveIndex].startIndex * sizeof(GLint)));
 		}
+		unBindVAO();
+	}
+
+	void Mesh::renderPrimitive(GLuint primitiveIndex)
+	{
+		bindVAO();
+		if (primitiveIndex <= primitives.size())
+		{
+			//Drawes each vertice of a primitive
+			glDrawElements(GL_TRIANGLES, 1 + primitives[primitiveIndex].numVertices - primitives[primitiveIndex].startIndex, GL_UNSIGNED_INT, (void*)(primitives[primitiveIndex].startIndex * sizeof(GLint)));
+		}
+		else
+		{
+			printf("Invalid primitive index.\n");
+		}
+		unBindVAO();
 	}
 
 	void Mesh::clearBuffers()

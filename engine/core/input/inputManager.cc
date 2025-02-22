@@ -45,6 +45,7 @@ namespace InputSystem
 		}
 
 		hid->mouse.delta = glm::vec2(0);
+		hid->mouse.position = glm::vec2(0);
 		hid->mouse.previousPosition = hid->mouse.position;
 	}
 

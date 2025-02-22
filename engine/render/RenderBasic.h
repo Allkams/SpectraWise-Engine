@@ -61,16 +61,17 @@ namespace Render
 
 		Mesh(std::vector<Vertice> Vertices, std::vector<GLuint> indices, std::vector<Primitive> primitives);
 
-		void renderMesh(GLuint primitiveIndex);
+		void render();
+		void renderPrimitive(GLuint primitiveIndex);
 
 		void clearBuffers();
-		void bindVAO();
-		void unBindVAO();
 
 	private:
 		GLuint VAO, VBO, EBO;
 
 		void processMesh(std::vector<Vertice> Vertices, std::vector<GLuint> indices);
+		void bindVAO();
+		void unBindVAO();
 	};
 
 	Mesh CreateTriangle(float32 width, float32 height);

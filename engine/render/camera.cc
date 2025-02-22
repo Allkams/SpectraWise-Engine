@@ -154,9 +154,9 @@ namespace RenderUtils
 		}
 		else
 		{
-			forwardVec.x = cosf((float)Yaw * (float)(3.14 / 180)) * cosf((float)Pitch * (float)(3.14 / 180));
-			forwardVec.y = sinf((float)Pitch * (float)(3.14 / 180));
-			forwardVec.z = sinf((float)Yaw * (float)(3.14 / 180)) * cosf((float)Pitch * (float)(3.14 / 180));
+			forwardVec.x = cosf(glm::radians(Yaw)) * cosf(glm::radians(Pitch));
+			forwardVec.y = sinf(glm::radians(Pitch));
+			forwardVec.z = sinf(glm::radians(Yaw)) * cosf(glm::radians(Pitch));
 		}
 		ForwardVector = glm::normalize(forwardVec);
 		// also re-calculate the Right and Up vector

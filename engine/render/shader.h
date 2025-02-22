@@ -36,7 +36,7 @@ public:
 	
 	void Destroy();
 
-	void ReloadShader();
+	void Reload();
 
 	void Enable();
 	void Disable();
@@ -51,6 +51,6 @@ public:
 
 	void setMat4(const std::string& name, glm::mat4 value) const;
 private:
-	void LoadShader(const char* vsPath, const char* fsPath);
+	void Load(const char* vsPath, const char* fsPath);
 
 };

@@ -20,10 +20,10 @@
 
 Shader::Shader(const char* vsPath, const char* fsPath) : vsPath(vsPath), fsPath(fsPath)
 {
-	LoadShader(vsPath, fsPath);
+	Load(vsPath, fsPath);
 }
 
-void Shader::LoadShader(const char* vsPath, const char* fsPath)
+void Shader::Load(const char* vsPath, const char* fsPath)
 {
 	std::string vsCode;
 	std::string fsCode;
@@ -104,10 +104,13 @@ void Shader::LoadShader(const char* vsPath, const char* fsPath)
 	glDeleteShader(fsID);
 }
 
-void Shader::ReloadShader()
+void Shader::Reload()
 {
+	printf("Shader Reload started\n");
 	this->Destroy();
-	this->LoadShader(this->vsPath.c_str(), this->fsPath.c_str());
+	this->Load(this->vsPath.c_str(), this->fsPath.c_str());
+	this->Enable();
+	printf("Shader Reload complete\n");
 }
 
 void Shader::Destroy()
