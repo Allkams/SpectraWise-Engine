@@ -1,10 +1,12 @@
 SET(files_core_core
 	entitymanager.cc
 	entitymanager.h
+	entity.cc
+	entity.h
 	resourcemanager.cc
 	resourcemanager.h
     )
-SOURCE_GROUP("core" FILES ${files_core})
+SOURCE_GROUP("core" FILES ${files_core_core})
 
 SET(files_core_input
 	input/gamepad.h
